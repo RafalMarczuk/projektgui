@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nmap Scanner GUI</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-pzjw8f+ua7Kw1TIqJ1mAd9pBpYsxs7WE6ti1c9SftSjo8F5qwC2IBK0K1Mlqnj2m" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Nmap Scanner GUI</h1>
+
+        {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+        {% endif %}
+
+        <form action="/scan" method="post">
+            <div class="form-group">
+                <label for="ip_address">IP Address:</label>
+                <input type="text" class="form-control" id="ip_address" name="ip_address" required>
+            </div>
+            <div class="form-group">
+                <label for="subnet_mask">Subnet Mask:</label>
+                <input type="text" class="form-control" id="subnet_mask" name="subnet_mask">
+            </div>
+            <div class="form-group">
+                <label for="port_option">Port Option:</label>
+                <select class="form-control" id="port_option" name="port_option">
+                    <option value="single">Single Port</option>
+                    <option value="range">Port Range</option>
+                    <option value="all">All Ports</option>
+                    <option value="default">Default</option>
+                </select>
+            </div>
+            <div class="form-group" id="port_single_group" style="display: none;">
+                <label for="port_single">Single Port:</label>
+                <input type="text" class="form-control" id="port_single" name="port_single">
+            </div>
+            <div class="form-group" id="port_range_group" style="display: none;">
+                <label for="port_range">Port Range:</label>
+                <input type="text" class="form-control" id="port_range" name="port_range">
+                <small class="form-text text-muted">Format: start-end (e.g., 90-125)</small>
+            </div>
+            <div class="form-group">
+                <label>Host Discovery:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="list_scan" name="list_scan" value="-sL">
+                    <label class="form-check-label" for="list_scan">List Scan (-sL)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="no_port_scan" name="no_port_scan" value="-sn">
+                    <label class="form-check-label" for="no_port_scan">No Port Scan (-sn)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="no_ping" name="no_ping" value="-Pn">
+                    <label class="form-check-label" for="no_ping">No Ping (-Pn)</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Port Scanning:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="syn_scan" name="syn_scan" value="-sS">
+                    <label class="form-check-label" for="syn_scan">SYN Scan (-sS)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="tcp_connect_scan" name="tcp_connect_scan" value="-sT">
+                    <label class="form-check-label" for="tcp_connect_scan">TCP Connect Scan (-sT)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="udp_scan" name="udp_scan" value="-sU">
+                    <label class="form-check-label" for="udp_scan">UDP Scan (-sU)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="sctp_init_scan" name="sctp_init_scan" value="-sY">
+                    <label class="form-check-label" for="sctp_init_scan">SCTP INIT Scan (-sY)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="ack_scan" name="ack_scan" value="-sA">
+                    <label class="form-check-label" for="ack_scan">ACK Scan (-sA)</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="ip_protocol_scan" name="ip_protocol_scan" value="-sO">
+                    <label class="form-check-label" for="ip_protocol_scan">IP Protocol Scan (-sO)</label>
+                </div>
+            </div>
+            <br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="aggressive" name="aggressive" value="-A">
+                <label class="form-check-label" for="aggressive">Aggressive Scan (-A)</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Scan</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('port_option').addEventListener('change', function() {
+            var portSingleGroup = document.getElementById('port_single_group');
+            var portRangeGroup = document.getElementById('port_range_group');
+            if (this.value === 'single') {
+                portSingleGroup.style.display = 'block';
+                portRangeGroup.style.display = 'none';
+            } else if (this.value === 'range') {
+                portSingleGroup.style.display = 'none';
+                portRangeGroup.style.display = 'block';
+            } else {
+                portSingleGroup.style.display = 'none';
+                portRangeGroup.style.display = 'none';
+            }
+        });
+
+        var listScanCheckbox = document.getElementById('list_scan');
+        var noPortScanCheckbox = document.getElementById('no_port_scan');
+        var noPingCheckbox = document.getElementById('no_ping');
+        var synScanCheckbox = document.getElementById('syn_scan');
+        var tcpConnectScanCheckbox = document.getElementById('tcp_connect_scan');
+        var udpScanCheckbox = document.getElementById('udp_scan');
+        var sctpInitScanCheckbox = document.getElementById('sctp_init_scan');
+        var ackScanCheckbox = document.getElementById('ack_scan');
+        var ipProtocolScanCheckbox = document.getElementById('ip_protocol_scan');
+        var aggressiveScanCheckbox = document.getElementById('aggressive');
+
+        listScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                noPortScanCheckbox.checked = false;
+                noPortScanCheckbox.disabled = true;
+                noPingCheckbox.checked = false;
+                noPingCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                udpScanCheckbox.checked = false;
+                udpScanCheckbox.disabled = true;
+                sctpInitScanCheckbox.checked = false;
+                sctpInitScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+                aggressiveScanCheckbox.checked = false;
+                aggressiveScanCheckbox.disabled = true;
+            } else {
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+                aggressiveScanCheckbox.disabled = false;
+            }
+        });
+
+        noPortScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                udpScanCheckbox.checked = false;
+                udpScanCheckbox.disabled = true;
+                sctpInitScanCheckbox.checked = false;
+                sctpInitScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+                aggressiveScanCheckbox.checked = false;
+                aggressiveScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+                aggressiveScanCheckbox.disabled = false;
+            }
+        });
+
+        noPingCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                udpScanCheckbox.checked = false;
+                udpScanCheckbox.disabled = true;
+                sctpInitScanCheckbox.checked = false;
+                sctpInitScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        synScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                noPortScanCheckbox.checked = false;
+                noPortScanCheckbox.disabled = true;
+                noPingCheckbox.checked = false;
+                noPingCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        tcpConnectScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                noPortScanCheckbox.checked = false;
+                noPortScanCheckbox.disabled = true;
+                noPingCheckbox.checked = false;
+                noPingCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        udpScanCheckbox.addEventListener('change', function(){
+            if (this.checked) {
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        sctpInitScanCheckbox.addEventListener('change', function(){
+            if (this.checked) {
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        ackScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                noPortScanCheckbox.checked = false;
+                noPortScanCheckbox.disabled = true;
+                noPingCheckbox.checked = false;
+                noPingCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                ipProtocolScanCheckbox.checked = false;
+                ipProtocolScanCheckbox.disabled = true;
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ipProtocolScanCheckbox.disabled = false;
+            }
+        });
+
+        ipProtocolScanCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                listScanCheckbox.checked = false;
+                listScanCheckbox.disabled = true;
+                noPortScanCheckbox.checked = false;
+                noPortScanCheckbox.disabled = true;
+                noPingCheckbox.checked = false;
+                noPingCheckbox.disabled = true;
+                synScanCheckbox.checked = false;
+                synScanCheckbox.disabled = true;
+                tcpConnectScanCheckbox.checked = false;
+                tcpConnectScanCheckbox.disabled = true;
+                udpScanCheckbox.checked = false;
+                udpScanCheckbox.disabled = true;
+                sctpInitScanCheckbox.checked = false;
+                sctpInitScanCheckbox.disabled = true;
+                ackScanCheckbox.checked = false;
+                ackScanCheckbox.disabled = true;
+
+            } else {
+                listScanCheckbox.disabled = false;
+                noPortScanCheckbox.disabled = false;
+                noPingCheckbox.disabled = false;
+                synScanCheckbox.disabled = false;
+                tcpConnectScanCheckbox.disabled = false;
+                udpScanCheckbox.disabled = false;
+                sctpInitScanCheckbox.disabled = false;
+                ackScanCheckbox.disabled = false;
+
+            }
+        });
+        aggressiveScanCheckbox.addEventListener('change', function() {
+           if (this.checked){
+               listScanCheckbox.checked = false;
+               listScanCheckbox.disabled = true;
+               noPortScanCheckbox.checked = false;
+               noPortScanCheckbox.disabled = true;
+           } else  {
+               listScanCheckbox.disabled = false;
+               noPortScanCheckbox.disabled = false;
+               noPingCheckbox.disabled = false;
+               synScanCheckbox.disabled = false;
+               tcpConnectScanCheckbox.disabled = false;
+               udpScanCheckbox.disabled = false;
+               sctpInitScanCheckbox.disabled = false;
+               ackScanCheckbox.disabled = false;
+               ipProtocolScanCheckbox.disabled = false;
+           }
+        });
+
+    </script>
+</body>
+</html>

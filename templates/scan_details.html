@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nmap Scanner GUI - Scan Details</title>
+</head>
+<body>
+    <h1>Scan Details - ID: {{ scan.id }}</h1>
+
+    <p><strong>Start Time:</strong> {{ scan.start_time }}</p>
+    <p><strong>End Time:</strong> {{ scan.end_time }}</p>
+
+    <h2>Scan Parameters:</h2>
+    <pre>{{ scan.parameters }}</pre>
+
+    <h2>Scan Results:</h2>
+    <pre>{{ scan.results }}</pre>
+
+    <p><a href="/scans">Back to Scans</a></p>
+</body>
+</html>

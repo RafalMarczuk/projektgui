@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nmap Scanner GUI - Scans</title>
+</head>
+<body>
+    <h1>Scans History</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Scan ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scan in scans %}
+                <tr>
+                    <td><a href="/scan/{{ scan.id }}">{{ scan.id }}</a></td>
+                    <td>{{ scan.start_time }}</td>
+                    <td>{{ scan.end_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
