@@ -2,10 +2,15 @@
 <html>
 <head>
     <title>Nmap Scanner GUI - Scan Details</title>
+    <style>
+        h1, h2, label, p, strong, pre {color: lawngreen}
+
+    </style>
 </head>
-<body>
+<body style="background-color: black">
     <h1>Scan Details - ID: {{ scan.id }}</h1>
 
+    <p><strong>Command:</strong> {{ scan.command }} </p>
     <p><strong>Start Time:</strong> {{ scan.start_time }}</p>
     <p><strong>End Time:</strong> {{ scan.end_time }}</p>
 
@@ -16,5 +21,7 @@
     <pre>{{ scan.results }}</pre>
 
     <p><a href="/scans">Back to Scans</a></p>
+    <p><a href="/">Main Page</a></p>
+    <p><a href="/scan/{{ scan.id }}/download">Download</a></p>
 </body>
 </html>

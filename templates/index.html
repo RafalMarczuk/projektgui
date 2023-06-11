@@ -3,13 +3,17 @@
 <head>
     <title>Nmap Scanner GUI</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-pzjw8f+ua7Kw1TIqJ1mAd9pBpYsxs7WE6ti1c9SftSjo8F5qwC2IBK0K1Mlqnj2m" crossorigin="anonymous">
+    <style>
+        h1, label, p {color: lawngreen}
+
+    </style>
 </head>
-<body>
+<body style="background-color: black">
     <div class="container">
         <h1>Nmap Scanner GUI</h1>
 
         {% if error_message %}
-            <div class="alert alert-danger">{{ error_message }}</div>
+            <div class="alert alert-danger" style="color: lawngreen">{{ error_message }}</div>
         {% endif %}
 
         <form action="/scan" method="post">
@@ -24,10 +28,10 @@
             <div class="form-group">
                 <label for="port_option">Port Option:</label>
                 <select class="form-control" id="port_option" name="port_option">
+                    <option value="default">Default</option>
                     <option value="single">Single Port</option>
                     <option value="range">Port Range</option>
                     <option value="all">All Ports</option>
-                    <option value="default">Default</option>
                 </select>
             </div>
             <div class="form-group" id="port_single_group" style="display: none;">
@@ -90,6 +94,7 @@
             <button type="submit" class="btn btn-primary">Scan</button>
         </form>
     </div>
+    <p><a href="/scans">Scan history</a></p>
 
     <script>
         document.getElementById('port_option').addEventListener('change', function() {

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download a scan</title>
+    <style>
+        h1, p, li {color: lawngreen}
+    </style>
+</head>
+<body style="background-color: black">
+    <h1>Download Scan Results of {{ scan.id }}</h1>
+    <p>Choose the format to download:</p>
+{#    <ul>#}
+{#        <li><a href="{{ url_for('download_txt', scan_id=scan.id) }}">TXT Format</a></li>#}
+{#        <li><a href="{{ url_for('download_html', scan_id=scan.id) }}">HTML Format</a></li>#}
+{#    </ul>#}
+
+    <a href="{{ url_for('download_txt', scan_id=scan.id) }}">TXT Format</a>
+    <a href="{{ url_for('download_html', scan_id=scan.id) }}">HTML Format</a>
+    <a href="{{ url_for('download_pdf', scan_id=scan.id) }}">PDF Format</a>
+
+</body>
+</html>

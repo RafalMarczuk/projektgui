@@ -1,0 +1,214 @@
+Starting Nmap 7.93 ( https://nmap.org ) at 2023-06-10 16:32 EDT
+Nmap scan report for 10.0.2.2
+Host is up (0.00078s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT    STATE SERVICE         VERSION
+135/tcp open  msrpc           Microsoft Windows RPC
+445/tcp open  microsoft-ds?
+808/tcp open  mc-nmf          .NET Message Framing
+902/tcp open  iss-realsecure?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, GetRequest, HTTPOptions, Help, NULL, RPCCheck, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
+|_    20 VMware Authentication Daemon Version 1.10: SSL Required, ServerDaemonProtocol:SOAP, MKSDisplayProtocol:VNC , , NFCSSL supported/t
+912/tcp open  vmware-auth     VMware Authentication Daemon 1.0 (Uses VNC, SOAP)
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port902-TCP:V=7.93%I=7%D=6/10%Time=6484DDDE%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(GenericLines,86,"20\x20VMw
+SF:are\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required
+SF:,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20
+SF:NFCSSL\x20supported/t\r\n")%r(GetRequest,86,"20\x20VMware\x20Authentica
+SF:tion\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemon
+SF:Protocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20support
+SF:ed/t\r\n")%r(HTTPOptions,86,"20\x20VMware\x20Authentication\x20Daemon\x
+SF:20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x
+SF:20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RTS
+SF:PRequest,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RPCCheck,86,"20\x20
+SF:VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Requi
+SF:red,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\
+SF:x20NFCSSL\x20supported/t\r\n")%r(DNSVersionBindReqTCP,86,"20\x20VMware\
+SF:x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x2
+SF:0ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCS
+SF:SL\x20supported/t\r\n")%r(DNSStatusRequestTCP,86,"20\x20VMware\x20Authe
+SF:ntication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerD
+SF:aemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20su
+SF:pported/t\r\n")%r(Help,86,"20\x20VMware\x20Authentication\x20Daemon\x20
+SF:Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20
+SF:MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(SSLSe
+SF:ssionReq,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(TerminalServerCooki
+SF:e,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n");
+MAC Address: 52:54:00:12:35:02 (QEMU virtual NIC)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: QEMU user mode network gateway (97%), Allied Telesyn AT-9006SX/SC switch (91%), Bay Networks BayStack 450 switch (software version 3.1.0.22) (91%), Linux 2.6.18 (CentOS 5, x86_64, SMP) (90%), Cabletron ELS100-24TXM Switch or Icom IC-7800 radio transceiver (89%), Cisco Catalyst 1900 switch or RAD IPMUX-1 TDM-over-IP multiplexer (89%), Tyco 24 Port SNMP Managed Switch (89%), Bay Networks BayStack 450 switch (software version 4.2.0.16) (89%), 3com OfficeConnect 812 ADSL router (89%), HP GbW2c Ethernet Blade Switch (88%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2023-06-10T20:32:42
+|_  start_date: N/A
+| smb2-security-mode: 
+|   311: 
+|_    Message signing enabled but not required
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.78 ms 10.0.2.2
+
+Nmap scan report for 10.0.2.3
+Host is up (0.00085s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT    STATE SERVICE         VERSION
+135/tcp open  msrpc           Microsoft Windows RPC
+445/tcp open  microsoft-ds?
+808/tcp open  mc-nmf          .NET Message Framing
+902/tcp open  iss-realsecure?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, GetRequest, HTTPOptions, Help, NULL, RPCCheck, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
+|_    20 VMware Authentication Daemon Version 1.10: SSL Required, ServerDaemonProtocol:SOAP, MKSDisplayProtocol:VNC , , NFCSSL supported/t
+912/tcp open  vmware-auth     VMware Authentication Daemon 1.0 (Uses VNC, SOAP)
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port902-TCP:V=7.93%I=7%D=6/10%Time=6484DDDE%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(GenericLines,86,"20\x20VMw
+SF:are\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required
+SF:,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20
+SF:NFCSSL\x20supported/t\r\n")%r(GetRequest,86,"20\x20VMware\x20Authentica
+SF:tion\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemon
+SF:Protocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20support
+SF:ed/t\r\n")%r(HTTPOptions,86,"20\x20VMware\x20Authentication\x20Daemon\x
+SF:20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x
+SF:20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RTS
+SF:PRequest,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RPCCheck,86,"20\x20
+SF:VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Requi
+SF:red,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\
+SF:x20NFCSSL\x20supported/t\r\n")%r(DNSVersionBindReqTCP,86,"20\x20VMware\
+SF:x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x2
+SF:0ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCS
+SF:SL\x20supported/t\r\n")%r(DNSStatusRequestTCP,86,"20\x20VMware\x20Authe
+SF:ntication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerD
+SF:aemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20su
+SF:pported/t\r\n")%r(Help,86,"20\x20VMware\x20Authentication\x20Daemon\x20
+SF:Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20
+SF:MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(SSLSe
+SF:ssionReq,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(TerminalServerCooki
+SF:e,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n");
+MAC Address: 52:54:00:12:35:03 (QEMU virtual NIC)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|bridge|switch|printer
+Running (JUST GUESSING): QEMU (97%), Oracle Virtualbox (95%), Bay Networks embedded (90%), Allied Telesyn embedded (89%), Linux (88%), Samsung embedded (87%)
+OS CPE: cpe:/a:qemu:qemu cpe:/o:oracle:virtualbox cpe:/h:baynetworks:baystack_450 cpe:/h:alliedtelesyn:at-9006 cpe:/o:linux:linux_kernel:2.6.18 cpe:/h:samsung:clp-315w
+Aggressive OS guesses: QEMU user mode network gateway (97%), Oracle Virtualbox (95%), Bay Networks BayStack 450 switch (software version 3.1.0.22) (90%), Allied Telesyn AT-9006SX/SC switch (89%), Linux 2.6.18 (CentOS 5, x86_64, SMP) (88%), Samsung CLP-315W printer (87%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2023-06-10T20:32:43
+|_  start_date: N/A
+| smb2-security-mode: 
+|   311: 
+|_    Message signing enabled but not required
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.85 ms 10.0.2.3
+
+Nmap scan report for 10.0.2.4
+Host is up (0.00062s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT    STATE SERVICE         VERSION
+135/tcp open  msrpc           Microsoft Windows RPC
+445/tcp open  microsoft-ds?
+808/tcp open  mc-nmf          .NET Message Framing
+902/tcp open  iss-realsecure?
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, GenericLines, GetRequest, HTTPOptions, Help, NULL, RPCCheck, RTSPRequest, SSLSessionReq, TerminalServerCookie: 
+|_    20 VMware Authentication Daemon Version 1.10: SSL Required, ServerDaemonProtocol:SOAP, MKSDisplayProtocol:VNC , , NFCSSL supported/t
+912/tcp open  vmware-auth     VMware Authentication Daemon 1.0 (Uses VNC, SOAP)
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port902-TCP:V=7.93%I=7%D=6/10%Time=6484DDDE%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(GenericLines,86,"20\x20VMw
+SF:are\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required
+SF:,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20
+SF:NFCSSL\x20supported/t\r\n")%r(GetRequest,86,"20\x20VMware\x20Authentica
+SF:tion\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemon
+SF:Protocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20support
+SF:ed/t\r\n")%r(HTTPOptions,86,"20\x20VMware\x20Authentication\x20Daemon\x
+SF:20Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x
+SF:20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RTS
+SF:PRequest,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(RPCCheck,86,"20\x20
+SF:VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Requi
+SF:red,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\
+SF:x20NFCSSL\x20supported/t\r\n")%r(DNSVersionBindReqTCP,86,"20\x20VMware\
+SF:x20Authentication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x2
+SF:0ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCS
+SF:SL\x20supported/t\r\n")%r(DNSStatusRequestTCP,86,"20\x20VMware\x20Authe
+SF:ntication\x20Daemon\x20Version\x201\.10:\x20SSL\x20Required,\x20ServerD
+SF:aemonProtocol:SOAP,\x20MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20su
+SF:pported/t\r\n")%r(Help,86,"20\x20VMware\x20Authentication\x20Daemon\x20
+SF:Version\x201\.10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20
+SF:MKSDisplayProtocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(SSLSe
+SF:ssionReq,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.
+SF:10:\x20SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProt
+SF:ocol:VNC\x20,\x20,\x20NFCSSL\x20supported/t\r\n")%r(TerminalServerCooki
+SF:e,86,"20\x20VMware\x20Authentication\x20Daemon\x20Version\x201\.10:\x20
+SF:SSL\x20Required,\x20ServerDaemonProtocol:SOAP,\x20MKSDisplayProtocol:VN
+SF:C\x20,\x20,\x20NFCSSL\x20supported/t\r\n");
+MAC Address: 52:54:00:12:35:04 (QEMU virtual NIC)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose|bridge|switch|printer
+Running (JUST GUESSING): QEMU (98%), Oracle Virtualbox (96%), Bay Networks embedded (90%), Allied Telesyn embedded (88%), Samsung embedded (88%), Linux (88%)
+OS CPE: cpe:/a:qemu:qemu cpe:/o:oracle:virtualbox cpe:/h:baynetworks:baystack_450 cpe:/h:alliedtelesyn:at-9006 cpe:/h:samsung:clp-315w cpe:/o:linux:linux_kernel:2.6.18
+Aggressive OS guesses: QEMU user mode network gateway (98%), Oracle Virtualbox (96%), Bay Networks BayStack 450 switch (software version 3.1.0.22) (90%), Allied Telesyn AT-9006SX/SC switch (88%), Samsung CLP-315W printer (88%), Linux 2.6.18 (CentOS 5, x86_64, SMP) (88%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   311: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2023-06-10T20:32:50
+|_  start_date: N/A
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.62 ms 10.0.2.4
+
+Nmap scan report for 10.0.2.15
+Host is up (0.000050s latency).
+All 1000 scanned ports on 10.0.2.15 are in ignored states.
+Not shown: 1000 closed tcp ports (reset)
+Too many fingerprints match this host to give specific OS details
+Network Distance: 0 hops
+
+Post-scan script results:
+| clock-skew: 
+|   0s: 
+|     10.0.2.4
+|     10.0.2.2
+|_    10.0.2.3
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (4 hosts up) scanned in 44.45 seconds
