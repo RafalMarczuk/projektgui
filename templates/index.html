@@ -191,18 +191,18 @@
             if (this.checked) {
                 listScanCheckbox.checked = false;
                 listScanCheckbox.disabled = true;
-                synScanCheckbox.checked = false;
-                synScanCheckbox.disabled = true;
-                tcpConnectScanCheckbox.checked = false;
-                tcpConnectScanCheckbox.disabled = true;
-                udpScanCheckbox.checked = false;
-                udpScanCheckbox.disabled = true;
-                sctpInitScanCheckbox.checked = false;
-                sctpInitScanCheckbox.disabled = true;
-                ackScanCheckbox.checked = false;
-                ackScanCheckbox.disabled = true;
-                ipProtocolScanCheckbox.checked = false;
-                ipProtocolScanCheckbox.disabled = true;
+                {#synScanCheckbox.checked = false;#}
+                {#synScanCheckbox.disabled = true;#}
+                {#tcpConnectScanCheckbox.checked = false;#}
+                {#tcpConnectScanCheckbox.disabled = true;#}
+                {#udpScanCheckbox.checked = false;#}
+                {#udpScanCheckbox.disabled = true;#}
+                {#sctpInitScanCheckbox.checked = false;#}
+                {#sctpInitScanCheckbox.disabled = true;#}
+                {#ackScanCheckbox.checked = false;#}
+                {#ackScanCheckbox.disabled = true;#}
+                {#ipProtocolScanCheckbox.checked = false;#}
+                {#ipProtocolScanCheckbox.disabled = true;#}
             } else {
                 listScanCheckbox.disabled = false;
                 noPortScanCheckbox.disabled = false;
@@ -212,6 +212,7 @@
                 sctpInitScanCheckbox.disabled = false;
                 ackScanCheckbox.disabled = false;
                 ipProtocolScanCheckbox.disabled = false;
+                aggressiveScanCheckbox.disabled = false;
             }
         });
 
@@ -221,8 +222,8 @@
                 listScanCheckbox.disabled = true;
                 noPortScanCheckbox.checked = false;
                 noPortScanCheckbox.disabled = true;
-                noPingCheckbox.checked = false;
-                noPingCheckbox.disabled = true;
+                {#noPingCheckbox.checked = false;#}
+                {#noPingCheckbox.disabled = true;#}
                 tcpConnectScanCheckbox.checked = false;
                 tcpConnectScanCheckbox.disabled = true;
                 ackScanCheckbox.checked = false;
@@ -247,8 +248,8 @@
                 listScanCheckbox.disabled = true;
                 noPortScanCheckbox.checked = false;
                 noPortScanCheckbox.disabled = true;
-                noPingCheckbox.checked = false;
-                noPingCheckbox.disabled = true;
+                {#noPingCheckbox.checked = false;#}
+                {#noPingCheckbox.disabled = true;#}
                 synScanCheckbox.checked = false;
                 synScanCheckbox.disabled = true;
                 ackScanCheckbox.checked = false;
@@ -305,8 +306,8 @@
                 listScanCheckbox.disabled = true;
                 noPortScanCheckbox.checked = false;
                 noPortScanCheckbox.disabled = true;
-                noPingCheckbox.checked = false;
-                noPingCheckbox.disabled = true;
+                {#noPingCheckbox.checked = false;#}
+                {#noPingCheckbox.disabled = true;#}
                 tcpConnectScanCheckbox.checked = false;
                 tcpConnectScanCheckbox.disabled = true;
                 synScanCheckbox.checked = false;
@@ -331,8 +332,8 @@
                 listScanCheckbox.disabled = true;
                 noPortScanCheckbox.checked = false;
                 noPortScanCheckbox.disabled = true;
-                noPingCheckbox.checked = false;
-                noPingCheckbox.disabled = true;
+                {#noPingCheckbox.checked = false;#}
+                {#noPingCheckbox.disabled = true;#}
                 synScanCheckbox.checked = false;
                 synScanCheckbox.disabled = true;
                 tcpConnectScanCheckbox.checked = false;
